@@ -205,10 +205,12 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const ringRefs = useRef<(SVGCircleElement | null)[]>([]);
+  const activeRingMobileRef = useRef<SVGCircleElement | null>(null);
+  const activeRingDesktopRef = useRef<SVGCircleElement | null>(null);
   const titleTestimonialsRef = useRef<HTMLHeadingElement | null>(null);
   const quoteRef = useRef<HTMLDivElement | null>(null);
   const brandRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const [isDesktop, setIsDesktop] = useState(false);
   const testimonialDuration = 5;
   const TESTIMONIALS = [
     {
@@ -253,6 +255,13 @@ export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
   }, []);
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mql.matches);
+    update();
+    mql.addEventListener?.("change", update);
+    return () => mql.removeEventListener?.("change", update);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -289,7 +298,9 @@ export default function Home() {
     });
   }, []);
   useEffect(() => {
-    const ring = ringRefs.current[activeTestimonial];
+    const ring = isDesktop
+      ? activeRingDesktopRef.current
+      : activeRingMobileRef.current;
     if (!ring) return;
     const len = ring.getTotalLength ? ring.getTotalLength() : 100;
     gsap.set(ring, { strokeDasharray: len, strokeDashoffset: len });
@@ -320,7 +331,7 @@ export default function Home() {
     return () => {
       if (ring) gsap.killTweensOf(ring);
     };
-  }, [activeTestimonial]);
+  }, [activeTestimonial, isDesktop]);
   return (
     <div className="min-h-screen bg-neutral-950 text-white selection:bg-red-500 selection:text-neutral-950 font-sans overflow-x-hidden">
       {/* Navigation */}
@@ -850,8 +861,68 @@ export default function Home() {
             rootMargin="-50px"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-24 items-start">
-            <div className="flex items-center justify-center lg:justify-start gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-10 md:gap-24 items-start">
+            {/* Avatares - Mobile: apenas 1 por vez */}
+            <div className="flex items-center justify-center lg:hidden mb-4">
+              {(() => {
+                const i = activeTestimonial;
+                const t = TESTIMONIALS[i];
+                return (
+                  <button
+                    key={t.name}
+                    onClick={() =>
+                      setActiveTestimonial((i + 1) % TESTIMONIALS.length)
+                    }
+                    className="relative rounded-full flex items-center justify-center transition-all duration-500 scale-110"
+                    aria-label={`Ver próximo depoimento de ${t.name}`}
+                  >
+                    {/* RING (progress) */}
+                    <svg
+                      className="absolute"
+                      viewBox="0 0 96 96"
+                      width="96"
+                      height="96"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="46"
+                        stroke="rgba(255,255,255,0.2)"
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                      <circle
+                        ref={(el) => {
+                          activeRingMobileRef.current = el;
+                        }}
+                        cx="48"
+                        cy="48"
+                        r="46"
+                        stroke="#ee121c"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    {/* AVATAR */}
+                    <div
+                      className="rounded-full overflow-hidden border-8 border-[#ee121c] transition-all duration-300"
+                      style={{ width: 82, height: 82 }}
+                    >
+                      <img
+                        src={t.avatar}
+                        alt={t.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </button>
+                );
+              })()}
+            </div>
+
+            {/* Avatares - Desktop: lista completa */}
+            <div className="hidden lg:flex items-center justify-center lg:justify-start gap-10">
               {TESTIMONIALS.map((t, i) => {
                 const active = i === activeTestimonial;
 
@@ -883,7 +954,7 @@ export default function Home() {
                         />
                         <circle
                           ref={(el) => {
-                            ringRefs.current[i] = el;
+                            if (active) activeRingDesktopRef.current = el;
                           }}
                           cx="48"
                           cy="48"
@@ -932,7 +1003,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-16 flex flex-wrap items-center justify-between gap-x-12 gap-y-8">
+          {/* Logos - Desktop: linha completa; Mobile: apenas a ativa */}
+          <div className="mt-16 hidden md:flex flex-wrap items-center justify-between gap-x-12 gap-y-8">
             {BRAND_LOGOS.map((b, i) => (
               <img
                 key={b.label}
@@ -952,6 +1024,14 @@ export default function Home() {
                 }}
               />
             ))}
+          </div>
+          <div className="mt-12 flex md:hidden items-center justify-center">
+            <img
+              src={BRAND_LOGOS[activeTestimonial].src}
+              alt={BRAND_LOGOS[activeTestimonial].label}
+              className="h-24 sm:h-28 object-contain transition-all duration-500 opacity-100"
+              style={{ filter: "none" }}
+            />
           </div>
         </div>
       </section>
@@ -1164,8 +1244,8 @@ export default function Home() {
         <div className="container mx-auto px-6 pt-32 md:pt-40 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-neutral-950">
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-6">
-                <img src="/logo.png" alt="Logo" className="h-30 w-auto" />
+              <div className="flex items-center gap-2 mb-6 mt-6">
+                <img src="/logo.png" alt="Logo" className="h-20 w-auto" />
               </div>
             </div>
 
