@@ -882,7 +882,9 @@ export default function Home() {
                           fill="none"
                         />
                         <circle
-                          ref={(el) => (ringRefs.current[i] = el)}
+                          ref={(el) => {
+                            ringRefs.current[i] = el;
+                          }}
                           cx="48"
                           cy="48"
                           r="46"
@@ -934,7 +936,9 @@ export default function Home() {
             {BRAND_LOGOS.map((b, i) => (
               <img
                 key={b.label}
-                ref={(el) => (brandRefs.current[i] = el)}
+                ref={(el) => {
+                  brandRefs.current[i] = el;
+                }}
                 src={b.src}
                 alt={b.label}
                 className={`h-14 md:h-20 lg:h-24 xl:h-24 object-contain transition-all duration-500 ${
