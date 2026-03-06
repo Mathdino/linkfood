@@ -41,6 +41,8 @@ const DotGrid = dynamic(() => import("@/components/DotGrid"), {
   ssr: false,
 });
 import { Card as SwapCard } from "@/components/CardSwap";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import {
   ChevronDown,
@@ -202,6 +204,55 @@ function HowItWorksTimeline() {
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isLight, setIsLight] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const ringRefs = useRef<(SVGCircleElement | null)[]>([]);
+  const titleTestimonialsRef = useRef<HTMLHeadingElement | null>(null);
+  const quoteRef = useRef<HTMLDivElement | null>(null);
+  const brandRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const testimonialDuration = 5;
+  const TESTIMONIALS = [
+    {
+      name: "Amanda Chen",
+      role: "CX Director @ FocalPoint",
+      quote:
+        "As automações elevaram nossa experiência do cliente. Cada interação ficou mais pessoal e escalável.",
+      avatar: "https://i.pravatar.cc/100?img=12",
+      logo: "/vercel.svg",
+    },
+    {
+      name: "Diego Nunes",
+      role: "Head de Operações @ Interlock",
+      quote:
+        "Integração fluida e métricas em tempo real nos deram velocidade sem perder qualidade.",
+      avatar: "https://i.pravatar.cc/100?img=23",
+      logo: "/next.svg",
+    },
+    {
+      name: "Beatriz Lima",
+      role: "Product Lead @ Acme Corp",
+      quote:
+        "A plataforma trouxe previsibilidade para o roadmap e reduziu gargalos do time.",
+      avatar: "https://i.pravatar.cc/100?img=34",
+      logo: "/globe.svg",
+    },
+    {
+      name: "Rafael Sousa",
+      role: "CTO @ Command+R",
+      quote:
+        "Escalamos com confiança mantendo estabilidade e uma experiência impecável.",
+      avatar: "https://i.pravatar.cc/100?img=45",
+      logo: "/window.svg",
+    },
+  ] as const;
+  const BRAND_LOGOS = [
+    { src: "/hamburgueria.png", label: "Hamburgueria" },
+    { src: "/marmita.png", label: "Marmita" },
+    { src: "/pizzaria.png", label: "Pizzaria" },
+    { src: "/bolo.png", label: "Bolo" },
+  ] as const;
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -222,6 +273,54 @@ export default function Home() {
       root.classList.add("dark");
     }
   }, [isLight]);
+  useEffect(() => {
+    if (!titleTestimonialsRef.current) return;
+    ScrollTrigger.create({
+      trigger: titleTestimonialsRef.current,
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(
+          titleTestimonialsRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        );
+      },
+    });
+  }, []);
+  useEffect(() => {
+    const ring = ringRefs.current[activeTestimonial];
+    if (!ring) return;
+    const len = ring.getTotalLength ? ring.getTotalLength() : 100;
+    gsap.set(ring, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(ring, {
+      strokeDashoffset: 0,
+      duration: testimonialDuration,
+      ease: "none",
+      onComplete: () => {
+        setActiveTestimonial((v) => (v + 1) % TESTIMONIALS.length);
+      },
+    });
+    if (quoteRef.current) {
+      gsap.fromTo(
+        quoteRef.current,
+        { y: 10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+      );
+    }
+    brandRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      gsap.to(el, {
+        scale: idx === activeTestimonial ? 1.1 : 1,
+        opacity: idx === activeTestimonial ? 1 : 0.3,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+    });
+    return () => {
+      if (ring) gsap.killTweensOf(ring);
+    };
+  }, [activeTestimonial]);
   return (
     <div className="min-h-screen bg-neutral-950 text-white selection:bg-red-500 selection:text-neutral-950 font-sans overflow-x-hidden">
       {/* Navigation */}
@@ -734,6 +833,121 @@ export default function Home() {
             <div className="lg:pl-8">
               <HowItWorksTimeline />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DEPOIMENTOS */}
+      <section className="pb-28 bg-neutral-950">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <SplitText
+            text="Trusted by teams worldwide"
+            className="text-3xl md:text-5xl font-bold text-center mb-24"
+            delay={50}
+            from={{ opacity: 0, y: 50 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.2}
+            rootMargin="-50px"
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-24 items-start">
+            <div className="flex items-center justify-center lg:justify-start gap-10">
+              {TESTIMONIALS.map((t, i) => {
+                const active = i === activeTestimonial;
+
+                return (
+                  <button
+                    key={t.name}
+                    onClick={() => setActiveTestimonial(i)}
+                    className={`relative rounded-full flex items-center justify-center transition-all duration-500
+        ${active ? "scale-110" : "opacity-50 grayscale"}
+        `}
+                    aria-label={`Ver depoimento de ${t.name}`}
+                  >
+                    {/* RING (progress) */}
+                    {active && (
+                      <svg
+                        className="absolute"
+                        viewBox="0 0 96 96"
+                        width="96"
+                        height="96"
+                        aria-hidden="true"
+                      >
+                        <circle
+                          cx="48"
+                          cy="48"
+                          r="46"
+                          stroke="rgba(255,255,255,0.2)"
+                          strokeWidth="2"
+                          fill="none"
+                        />
+                        <circle
+                          ref={(el) => (ringRefs.current[i] = el)}
+                          cx="48"
+                          cy="48"
+                          r="46"
+                          stroke="#ee121c"
+                          strokeWidth="2"
+                          fill="none"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    )}
+
+                    {/* AVATAR */}
+                    <div
+                      className={`rounded-full overflow-hidden border-8 transition-all duration-300 ${
+                        active ? "border-[#ee121c]" : "border-transparent"
+                      }`}
+                      style={{
+                        width: active ? 82 : 70,
+                        height: active ? 82 : 70,
+                      }}
+                    >
+                      <img
+                        src={t.avatar}
+                        alt={t.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div ref={quoteRef} className="text-left">
+              <p className="text-neutral-300 text-lg md:text-xl leading-relaxed max-w-2xl">
+                “{TESTIMONIALS[activeTestimonial].quote}”
+              </p>
+              <div className="mt-4 text-sm md:text-base">
+                <span className="text-white font-bold">
+                  {TESTIMONIALS[activeTestimonial].name}
+                </span>
+                <span className="text-neutral-400">
+                  , {TESTIMONIALS[activeTestimonial].role}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 flex flex-wrap items-center justify-between gap-x-12 gap-y-8">
+            {BRAND_LOGOS.map((b, i) => (
+              <img
+                key={b.label}
+                ref={(el) => (brandRefs.current[i] = el)}
+                src={b.src}
+                alt={b.label}
+                className={`h-14 md:h-20 lg:h-24 xl:h-24 object-contain transition-all duration-500 ${
+                  i === activeTestimonial ? "opacity-100" : "opacity-30"
+                }`}
+                style={{
+                  filter:
+                    i === activeTestimonial
+                      ? "none"
+                      : "grayscale(100%) blur(2px)",
+                }}
+              />
+            ))}
           </div>
         </div>
       </section>
