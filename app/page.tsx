@@ -51,6 +51,14 @@ import {
   Utensils,
   Sun,
   Moon,
+  Pencil,
+  Trash2,
+  UtensilsCrossed,
+  Ticket,
+  Package,
+  User,
+  DollarSign,
+  ClipboardList,
 } from "lucide-react";
 
 type HowItWorksStep = {
@@ -347,14 +355,19 @@ export default function Home() {
           <StaggeredMenu
             position="right"
             items={[
-              { label: "Home", ariaLabel: "Go to home page", link: "#" },
+              { label: "Home", ariaLabel: "Página Inicial", link: "/" },
               {
                 label: "Products",
                 ariaLabel: "View products",
-                link: "#products",
+                link: "#xxxxx",
               },
-              { label: "Pricing", ariaLabel: "View pricing", link: "#pricing" },
-              { label: "About", ariaLabel: "About us", link: "#about" },
+              {
+                label: "Depoimentos",
+                ariaLabel: "Depoimentos",
+                link: "#xxxxx",
+              },
+              { label: "Preços", ariaLabel: "Preço", link: "#xxxxx" },
+              { label: "Contato", ariaLabel: "Contato", link: "#xxxxx" },
             ]}
             socialItems={[
               { label: "Twitter", link: "https://twitter.com" },
@@ -457,16 +470,20 @@ export default function Home() {
           <div className="space-y-8 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-sm text-neutral-400">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              Now Available v2.0
+              Link Food
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
-              Build Faster <br />
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+              Cardápio Online <br />
               <div className="flex justify-start gap-2 flex-wrap">
-                <span>Ship with</span>
-                <br />
+                <span>para Restaurantes</span>
                 <RotatingText
-                  texts={["Confidence", "Speed", "Ease", "Power"]}
+                  texts={[
+                    "Venda Mais",
+                    "Gerencie Melhor",
+                    "Cresça Rápido",
+                    "Venda Sem Taxas",
+                  ]}
                   mainClassName="bg-red-500 text-neutral-950 px-2 rounded-lg"
                   staggerFrom="last"
                   initial={{ y: "100%" }}
@@ -487,8 +504,8 @@ export default function Home() {
               initialOpacity={0}
             >
               <p className="text-xl text-neutral-400 max-w-xl">
-                The modern platform for teams who want to move fast without
-                breaking things. Orchestrate your entire workflow in one place.
+                Crie seu cardápio online, compartilhe seu link e receba pedidos
+                automaticamente no WhatsApp e no painel de pedidos.
               </p>
             </FadeContent>
 
@@ -499,10 +516,10 @@ export default function Home() {
                 color="#fb2c36"
                 speed="4s"
               >
-                Get Started
+                Criar meu Cardápio
               </StarBorder>
               <button className="px-8 py-4 rounded-full bg-neutral-900 text-white font-semibold hover:bg-neutral-800 transition-colors">
-                Try for free
+                Ver Demonstração
               </button>
             </div>
           </div>
@@ -537,7 +554,7 @@ export default function Home() {
         <div className="container mx-auto">
           <div className="mb-20">
             <SplitText
-              text="Features that empower your team."
+              text="Ferramentas que fazem seu delivery vender mais"
               className="text-4xl md:text-6xl font-bold text-center"
               delay={50}
               from={{ opacity: 0, y: 50 }}
@@ -558,37 +575,127 @@ export default function Home() {
               threshold={0.1}
               className="md:row-span-2 md:col-span-1 h-full"
             >
-              <div className="bg-lime-400 rounded-[2rem] p-8 h-full flex flex-col justify-between relative overflow-hidden group">
+              <div className="bg-[#ee121c] rounded-[2rem] p-8 h-full flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] hover:shadow-2xl hover:shadow-red-700/40 transition-all duration-300">
+                {/* Decorative circles */}
+                <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/5 pointer-events-none" />
+                <div className="absolute -bottom-24 -left-12 w-72 h-72 rounded-full bg-black/10 pointer-events-none" />
+
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-4 text-neutral-950">
-                    Guided Onboarding <br /> For Every Team
+                  <span className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wide uppercase">
+                    Cardápio Digital
+                  </span>
+                  <h3 className="text-4xl font-bold mb-4 text-white leading-tight">
+                    Crie seu Cardápio em Minutos
                   </h3>
-                  <p className="text-neutral-800 text-lg">
-                    Get your team up and running in minutes with step-by-step
-                    walkthroughs.
-                  </p>
+
+                  <div className="space-y-2 mt-4">
+                    {[
+                      "Cadastre hambúrgueres, pizzas, combos e bebidas",
+                      "Atualize preços e produtos quando quiser",
+                      "Fique pronto para receber pedidos rapidamente",
+                    ].map((text) => (
+                      <div key={text} className="flex items-start gap-2">
+                        <span className="mt-0.5 w-4 h-4 rounded-full bg-white/30 flex items-center justify-center flex-shrink-0">
+                          <svg
+                            width="8"
+                            height="8"
+                            viewBox="0 0 8 8"
+                            fill="none"
+                          >
+                            <path
+                              d="M1.5 4L3.5 6L6.5 2"
+                              stroke="white"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        <p className="text-white/90 text-sm leading-snug">
+                          {text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Visual */}
-                <div className="mt-8 bg-neutral-950 rounded-t-3xl border-t-8 border-x-8 border-neutral-900 shadow-2xl translate-y-4 group-hover:translate-y-2 transition-transform duration-500 relative h-80 w-full overflow-hidden">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-neutral-900 rounded-b-xl z-20"></div>
-                  <div className="p-6 pt-12 text-center">
-                    <h4 className="text-3xl font-bold text-white mb-2">
-                      Your workspace <br /> is ready!
-                    </h4>
-                    <p className="text-neutral-500 text-sm mb-6">
-                      Invite your team and start collaborating instantly.
-                    </p>
+                {/* Phone mockup */}
+                <div className="mt-8 bg-neutral-950 rounded-t-3xl border-t-8 border-x-8 border-neutral-900 shadow-2xl translate-y-4 group-hover:translate-y-1 transition-transform duration-500 relative w-full overflow-hidden">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-neutral-900 rounded-b-xl z-20" />
 
-                    <div className="bg-lime-500/20 rounded-xl p-4 text-left border border-lime-500/30">
-                      <div className="text-xs text-lime-400 font-bold mb-1">
-                        Project
-                      </div>
-                      <div className="text-white font-bold text-lg">Alpha</div>
-                      <div className="mt-4 flex items-center gap-2 text-[10px] text-neutral-500 tracking-widest uppercase">
-                        <span>PRJ</span> • <span>2024</span> • <span>LIVE</span>
-                      </div>
+                  <div className="p-5 pt-10 bg-neutral-950">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-white font-bold text-base">
+                        Meu Cardápio
+                      </p>
+                      <span className="bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        Online
+                      </span>
                     </div>
+
+                    {/* Product cards */}
+                    <div className="space-y-2">
+                      {[
+                        {
+                          name: "X-Carne",
+                          cat: "Hambúrguer",
+                          price: "R$ 28,00",
+                          img: "./hb.png",
+                        },
+                        {
+                          name: "Pizza Bacon",
+                          cat: "Pizza",
+                          price: "R$ 54,00",
+                          img: "./pizza_bacon.png",
+                        },
+                      ].map((item, i) => (
+                        <div
+                          key={item.name}
+                          className={`bg-white rounded-xl p-2.5 flex items-center gap-2.5 transition-transform duration-300 ${
+                            i === 0
+                              ? "group-hover:translate-x-1"
+                              : "group-hover:-translate-x-1"
+                          }`}
+                        >
+                          <img
+                            src={item.img}
+                            alt={item.name}
+                            className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[10px] text-gray-400">
+                              {item.cat}
+                            </div>
+                            <div className="text-gray-900 font-semibold text-xs">
+                              {item.name}
+                            </div>
+                            <div className="flex items-center gap-1 mt-1">
+                              <button className="w-5 h-5 flex items-center justify-center rounded border border-gray-200 text-gray-400">
+                                <Pencil size={9} />
+                              </button>
+                              <button className="w-5 h-5 flex items-center justify-center rounded bg-red-50 border border-red-100 text-red-400">
+                                <Trash2 size={9} />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                            <span className="text-gray-900 font-bold text-xs">
+                              {item.price}
+                            </span>
+                            <span className="text-[9px] px-1.5 py-0.5 rounded-full border text-green-600 border-green-200 bg-green-50">
+                              Ativo
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Add button */}
+                    <button className="mt-3 w-full bg-[#ee121c] text-white text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1 opacity-90 hover:opacity-100 transition-opacity">
+                      <span className="text-base leading-none">+</span>{" "}
+                      Adicionar produto
+                    </button>
                   </div>
                 </div>
               </div>
@@ -604,66 +711,143 @@ export default function Home() {
               threshold={0.1}
               className="md:col-span-2 h-[400px]"
             >
-              <div className="bg-neutral-900 rounded-[2rem] p-8 h-full flex flex-row justify-between relative overflow-hidden group border border-neutral-800">
+              <div className="bg-neutral-900 rounded-[2rem] p-8 h-full flex flex-row justify-between relative overflow-hidden group border border-neutral-800 hover:border-red-500/20 hover:shadow-2xl hover:shadow-red-500/5 transition-all duration-300">
+                {/* Decorative glow */}
+                <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-red-500/5 blur-3xl pointer-events-none group-hover:bg-red-500/10 transition-colors duration-500" />
+
                 <div className="relative z-10 max-w-sm flex flex-col justify-center">
-                  <h3 className="text-3xl font-bold mb-4 text-white">
-                    Real-time Data
+                  <span className="inline-block bg-red-500/10 text-red-400 text-xs font-bold px-3 py-1 rounded-full mb-4 tracking-wide uppercase w-fit">
+                    Tempo Real
+                  </span>
+                  <h3 className="text-4xl font-bold mb-4 text-white leading-tight">
+                    Pedidos em <br />
+                    <span className="text-[#ee121c]">Tempo Real</span>
                   </h3>
-                  <p className="text-neutral-400 text-lg">
-                    Monitor metrics, analytics, and team activity instantly.
-                  </p>
+
+                  <div className="space-y-2 mt-1">
+                    {[
+                      "Acompanhe todos os pedidos instantaneamente",
+                      "Visualize status e informações do cliente",
+                      "Tudo em um único painel centralizado",
+                    ].map((text) => (
+                      <div key={text} className="flex items-start gap-2">
+                        <span className="mt-0.5 w-4 h-4 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                          <svg
+                            width="8"
+                            height="8"
+                            viewBox="0 0 8 8"
+                            fill="none"
+                          >
+                            <path
+                              d="M1.5 4L3.5 6L6.5 2"
+                              stroke="#ee121c"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        <p className="text-neutral-400 text-sm leading-snug">
+                          {text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Live indicator */}
+                  <div className="flex items-center gap-2 mt-6 bg-neutral-800/60 rounded-full px-4 py-2 w-fit border border-neutral-700">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-xs text-neutral-300 font-medium">
+                      3 novos pedidos agora
+                    </span>
+                  </div>
                 </div>
 
-                {/* Visual - Phone mockup */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 w-64 bg-neutral-950 rounded-[2.5rem] border-8 border-neutral-800 p-2 shadow-2xl rotate-[-5deg] group-hover:rotate-0 transition-transform duration-500 hidden md:block">
-                  <div className="bg-neutral-900 rounded-[2rem] h-96 w-full p-4 flex flex-col relative overflow-hidden">
-                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-5 bg-neutral-800 rounded-full z-20"></div>
-                    <div className="mt-6 bg-neutral-800/50 rounded-full px-3 py-2 flex items-center gap-2 mb-4">
-                      <span className="w-2 h-2 rounded-full bg-neutral-600"></span>
-                      <span className="text-xs text-neutral-500">
-                        Search projects...
+                {/* Phone mockup */}
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-56 bg-neutral-950 rounded-[2.5rem] border-8 border-neutral-800 p-2 shadow-2xl rotate-[-5deg] group-hover:rotate-0 group-hover:right-8 transition-all duration-500 hidden md:block">
+                  <div className="bg-white rounded-[2rem] h-[340px] w-full flex flex-col relative overflow-hidden">
+                    {/* Notch */}
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-neutral-200 rounded-full z-20" />
+
+                    {/* Header */}
+                    <div className="mt-6 px-4 py-2 border-b border-gray-100 flex items-center justify-between">
+                      <p className="text-[10px] text-gray-800 font-bold">
+                        Pedidos
+                      </p>
+                    </div>
+
+                    {/* Orders */}
+                    <div className="flex flex-col gap-1.5 px-2 pt-2 overflow-hidden">
+                      {[
+                        {
+                          id: "#0492",
+                          name: "Carlos Silva",
+                          item: "X-Bacon",
+                          total: "R$ 32,00",
+                          status: "Novo",
+                          statusColor: "bg-blue-500",
+                        },
+                        {
+                          id: "#0491",
+                          name: "Ana Lima",
+                          item: "Combo Família",
+                          total: "R$ 76,00",
+                          status: "Preparo",
+                          statusColor: "bg-yellow-500",
+                        },
+                        {
+                          id: "#0490",
+                          name: "Matheus B.",
+                          item: "Pizza 4Q",
+                          total: "R$ 54,00",
+                          status: "Entregue",
+                          statusColor: "bg-green-500",
+                        },
+                      ].map((order, i) => (
+                        <div
+                          key={order.id}
+                          className={`bg-white rounded-xl border border-gray-100 shadow-sm px-2.5 py-2 transition-transform duration-300 ${i === 0 ? "group-hover:-translate-y-0.5" : ""}`}
+                        >
+                          <div className="flex items-center justify-between mb-0.5">
+                            <div className="flex items-center gap-1">
+                              <span className="font-bold text-[10px] text-gray-900">
+                                {order.id}
+                              </span>
+                            </div>
+                            <span
+                              className={`${order.statusColor} text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full`}
+                            >
+                              {order.status}
+                            </span>
+                          </div>
+                          <p className="text-[9px] text-gray-500">
+                            {order.name} · {order.item}
+                          </p>
+                          <p className="text-[10px] font-bold text-gray-800 mt-0.5">
+                            {order.total}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bottom bar */}
+                    <div className="mt-auto mx-2 mb-2 bg-gray-50 rounded-xl px-3 py-2 flex items-center justify-between border border-gray-100">
+                      <span className="text-[9px] text-gray-500">
+                        Total hoje
                       </span>
-                    </div>
-
-                    <div className="mb-4">
-                      <div className="text-xs text-neutral-500 mb-1">
-                        Active projects
-                      </div>
-                      <div className="text-2xl font-bold text-white">
-                        24 running
-                      </div>
-                      <div className="flex gap-2 mt-2">
-                        <span className="bg-lime-400 text-neutral-950 text-[10px] font-bold px-2 py-1 rounded-full">
-                          Deploy
-                        </span>
-                        <span className="bg-neutral-800 text-neutral-400 text-[10px] font-bold px-2 py-1 rounded-full">
-                          Build
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-auto bg-neutral-950 rounded-xl p-3 border border-neutral-800">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-[10px] text-neutral-500">
-                          Build status
-                        </span>
-                        <span className="text-[10px] text-neutral-500">i</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-white">
-                          All passing
-                        </span>
-                        <span className="bg-lime-400/20 text-lime-400 text-[10px] font-bold px-1.5 py-0.5 rounded">
-                          100%
-                        </span>
-                      </div>
+                      <span className="text-[11px] font-bold text-gray-900">
+                        R$ 1.240,00
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </AnimatedContent>
 
-            {/* Card 3: Trusted By (Small, Bottom Left) */}
+            {/* Card 3: Pedidos no WhatsApp */}
             <AnimatedContent
               distance={100}
               direction="vertical"
@@ -673,39 +857,49 @@ export default function Home() {
               threshold={0.1}
               className="md:col-span-1 h-[320px]"
             >
-              <div className="bg-neutral-900 rounded-[2rem] p-8 h-full flex flex-col justify-center items-center text-center relative overflow-hidden group border border-neutral-800 hover:border-red-500/30 transition-colors">
-                <h3 className="text-2xl font-bold mb-2 text-white">
-                  Trusted By
-                </h3>
-                <div className="text-3xl font-bold text-red-500 mb-6">
-                  254k+ Users
+              <div className="bg-neutral-900 rounded-[2rem] p-8 h-full flex flex-col justify-between relative overflow-hidden border border-neutral-800 hover:border-red-500/30 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300 cursor-pointer">
+                <div>
+                  <h3 className="text-3xl font-bold mb-2 text-white">
+                    Pedidos direto no WhatsApp
+                  </h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed">
+                    Receba os pedidos dos seus clientes diretamente no WhatsApp
+                    da empresa. Todas as informações chegam organizadas:
+                  </p>
                 </div>
 
-                <div className="flex -space-x-4 mb-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-10 h-10 rounded-full border-2 border-neutral-900 bg-neutral-800 flex items-center justify-center text-xs overflow-hidden"
-                    >
-                      <img
-                        src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                        alt="User"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
-                  <div className="w-10 h-10 rounded-full border-2 border-neutral-900 bg-red-500 text-neutral-950 flex items-center justify-center text-xs font-bold">
-                    5+
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { icon: <Package size={14} />, label: "produtos" },
+                      { icon: <User size={14} />, label: "cliente" },
+                      {
+                        icon: <DollarSign size={14} />,
+                        label: "valor do pedido",
+                      },
+                      {
+                        icon: <ClipboardList size={14} />,
+                        label: "observações",
+                      },
+                    ].map(({ icon, label }) => (
+                      <div
+                        key={label}
+                        className="bg-neutral-800/60 rounded-xl px-3 py-2 flex items-center gap-2 hover:bg-red-500/20 hover:scale-105 hover:border-red-500/30 border border-transparent transition-all duration-200 cursor-pointer"
+                      >
+                        <span className="text-neutral-400 group-hover:text-red-400 transition-colors">
+                          {icon}
+                        </span>
+                        <span className="text-neutral-300 text-xs font-medium">
+                          {label}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                </div>
-
-                <div className="flex items-center gap-1 text-sm text-neutral-400">
-                  <span className="text-red-500">★</span> 4.9 from 48k+ reviews
                 </div>
               </div>
             </AnimatedContent>
 
-            {/* Card 4: Built to Scale (Small, Bottom Right) */}
+            {/* Card 4: Controle do Cardápio */}
             <AnimatedContent
               distance={100}
               direction="vertical"
@@ -715,37 +909,43 @@ export default function Home() {
               threshold={0.1}
               className="md:col-span-1 h-[320px]"
             >
-              <div className="bg-red-500 rounded-[2rem] p-8 h-full flex flex-col justify-between relative overflow-hidden group">
+              <div
+                style={{ backgroundColor: "#ee121c" }}
+                className="rounded-[2rem] p-8 h-full flex flex-col gap-14 relative overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-700/40 hover:brightness-110 transition-all duration-300 cursor-pointer"
+              >
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 text-neutral-950">
-                    Built to Scale
+                  <h3 className="text-4xl font-bold mb-2 text-white">
+                    Controle total do cardápio
                   </h3>
-                  <p className="text-neutral-800 text-sm">
-                    Enterprise-ready infrastructure that grows with you.
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Gerencie seu cardápio digital com total liberdade.
                   </p>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="bg-neutral-950/10 backdrop-blur-sm rounded-xl p-3 flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🚀</span>
-                      <span className="font-bold text-neutral-950 text-sm">
-                        2,598 Deploys
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-neutral-700">
-                      +24%
-                    </span>
+                <div className="space-y-2">
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { icon: <Pencil size={14} />, label: "altere preços" },
+                      {
+                        icon: <UtensilsCrossed size={14} />,
+                        label: "adicione produtos",
+                      },
+                      { icon: <Ticket size={14} />, label: "crie promoções" },
+                    ].map(({ icon, label }) => (
+                      <div
+                        key={label}
+                        className="bg-white/20 rounded-xl px-2 py-3 flex flex-col items-center gap-2 text-center hover:bg-white/35 hover:scale-110 transition-all duration-200 cursor-pointer"
+                      >
+                        <span className="text-white">{icon}</span>
+                        <span className="text-white text-[10px] font-medium leading-tight">
+                          {label}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="bg-neutral-950 text-white rounded-xl p-3 flex justify-between items-center shadow-lg">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg text-red-500">⚡</span>
-                      <span className="font-bold text-sm">99.9% Uptime</span>
-                    </div>
-                    <span className="text-xs font-bold text-neutral-500">
-                      +0.2%
-                    </span>
-                  </div>
+                  <p className="text-white/70 text-xs pt-1 font-medium">
+                    Tudo em poucos cliques.
+                  </p>
                 </div>
               </div>
             </AnimatedContent>
@@ -1037,7 +1237,7 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-32 bg-neutral-900/30">
+      <section id="pricing" className="py-32 bg-neutral-950">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
             Simple, transparent pricing
@@ -1250,7 +1450,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-sm tracking-wider opacity-60 uppercase">
+              <h4 className="font-bold mb-6 text-sm tracking-wider text-white uppercase">
                 Menu
               </h4>
               <ul className="space-y-4 font-medium">
@@ -1273,7 +1473,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-sm tracking-wider opacity-60 uppercase">
+              <h4 className="font-bold mb-6 text-sm tracking-wider text-white uppercase">
                 Company
               </h4>
               <ul className="space-y-4 font-medium">
@@ -1296,7 +1496,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-sm tracking-wider opacity-60 uppercase">
+              <h4 className="font-bold mb-6 text-sm tracking-wider text-white uppercase">
                 Social
               </h4>
               <ul className="space-y-4 font-medium">
