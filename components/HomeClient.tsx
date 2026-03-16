@@ -519,6 +519,7 @@ export default function HomeClient() {
                 link: "#xxxxx",
               },
               { label: "Preços", ariaLabel: "Preço", link: "#xxxxx" },
+              { label: "Blog", ariaLabel: "Blog", link: "/blog" },
               { label: "Contato", ariaLabel: "Contato", link: "#xxxxx" },
             ]}
             socialItems={[
@@ -1031,7 +1032,7 @@ export default function HomeClient() {
       <section className="py-20 border-y border-neutral-900 bg-neutral-950/50">
         <div className="container mx-auto px-6">
           <p className="text-neutral-500 mb-12 uppercase tracking-widest text-sm font-semibold text-center">
-            Trusted by industry leaders
+            Nossos parceiros fazem a diferença
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
@@ -1210,7 +1211,7 @@ export default function HomeClient() {
       <section className="pb-5 bg-neutral-950">
         <div className="container mx-auto px-6 max-w-6xl">
           <SplitText
-            text="Trusted by teams worldwide"
+            text="Empresas que confiam no Link Food"
             className="text-3xl md:text-5xl font-bold text-center mb-24"
             delay={50}
             from={{ opacity: 0, y: 50 }}
@@ -1407,11 +1408,11 @@ export default function HomeClient() {
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
               <div>
                 <p className="text-neutral-500 text-sm font-semibold uppercase tracking-widest mb-4">
-                  Starter
+                  Start
                 </p>
                 <div className="flex items-end gap-1 mb-1">
                   <span className="text-6xl font-black text-white leading-none">
-                    R$49
+                    R$98
                   </span>
                   <span className="text-neutral-500 text-base mb-2">/mês</span>
                 </div>
@@ -1420,10 +1421,11 @@ export default function HomeClient() {
               <div className="h-px bg-neutral-800" />
               <ul className="flex flex-col gap-3 flex-1">
                 {[
-                  "1 cardápio digital",
-                  "Pedidos via WhatsApp",
-                  "Até 30 produtos",
+                  "Cardápio digital",
+                  "Pedidos via WhatsApp + Painel",
+                  "Até 15 produtos",
                   "Suporte por e-mail",
+                  "Treinamento",
                 ].map((item) => (
                   <li
                     key={item}
@@ -1445,7 +1447,7 @@ export default function HomeClient() {
                 ))}
               </ul>
               <button className="w-full py-3.5 rounded-xl border border-neutral-700 text-neutral-300 text-sm font-semibold hover:bg-neutral-800 hover:border-neutral-600 hover:text-white transition-all duration-200">
-                Começar grátis
+                Assinar Agora
               </button>
             </div>
             <div
@@ -1468,7 +1470,7 @@ export default function HomeClient() {
                   </p>
                   <div className="flex items-end gap-1 mb-1">
                     <span className="text-6xl font-black text-white leading-none">
-                      R$99
+                      R$198
                     </span>
                     <span className="text-neutral-500 text-base mb-2">
                       /mês
@@ -1481,12 +1483,12 @@ export default function HomeClient() {
                 <div className="h-px bg-red-500/20" />
                 <ul className="flex flex-col gap-3 flex-1">
                   {[
-                    "Cardápios ilimitados",
+                    "Cardápios digital",
                     "Pedidos via WhatsApp + Painel",
-                    "Produtos ilimitados",
-                    "Cupons e promoções",
-                    "Relatórios de vendas",
+                    "Chat ia integrado no Whatsapp",
+                    "Até 30 produtos",
                     "Suporte prioritário",
+                    "Treinamento",
                   ].map((item) => (
                     <li
                       key={item}
@@ -1521,26 +1523,29 @@ export default function HomeClient() {
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
               <div>
                 <p className="text-neutral-500 text-sm font-semibold uppercase tracking-widest mb-4">
-                  Enterprise
+                  Business
                 </p>
                 <div className="flex items-end gap-1 mb-1">
-                  <span className="text-6xl font-black text-white leading-none">
-                    R$199
+                  <span className="text-4xl font-black text-white leading-none">
+                    Sob consulta
                   </span>
-                  <span className="text-neutral-500 text-base mb-2">/mês</span>
                 </div>
                 <p className="text-neutral-500 text-sm">
-                  Para redes e franquias
+                  Para redes, franquias.
                 </p>
               </div>
               <div className="h-px bg-neutral-800" />
               <ul className="flex flex-col gap-3 flex-1">
                 {[
                   "Tudo do plano Pro",
-                  "Multi-unidades",
-                  "API de integração",
-                  "Gerente dedicado",
-                  "SLA garantido",
+                  "Produtos ilimitados",
+                  "Combos ilimitados",
+                  "Domínio personalizado",
+                  "Cardápio totalmente customizado",
+                  "Integrações sob demanda",
+                  "Hospedagem premium",
+                  "Suporte dedicado prioritário",
+                  "Treinamento completo da equipe",
                 ].map((item) => (
                   <li
                     key={item}
@@ -1566,13 +1571,6 @@ export default function HomeClient() {
               </button>
             </div>
           </div>
-          <p
-            ref={pricingNoteRef}
-            className="text-center text-neutral-600 text-sm mt-10 opacity-0"
-          >
-            Todos os planos incluem 14 dias grátis · Cancele quando quiser · Sem
-            cartão de crédito
-          </p>
         </div>
       </section>
       <div className="relative">
@@ -1639,7 +1637,7 @@ export default function HomeClient() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
               <div className="col-span-2 md:col-span-1">
                 <img
-                  src="/logo.png"
+                  src="/logo-footer.png"
                   alt="Link Food"
                   className="h-16 w-auto mb-4 hover:opacity-80 transition-opacity duration-200"
                 />
