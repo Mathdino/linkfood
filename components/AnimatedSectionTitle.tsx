@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 export default function AnimatedSectionTitle({
   children,
 }: {
-  children: string;
+  children: React.ReactNode;
 }) {
   return (
     <motion.h2

@@ -37,65 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-const seoCards = [
-  {
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M4 6h16M4 12h8m-8 6h16" />
-      </svg>
-    ),
-    title: "Título otimizado",
-    desc: "Use termos principais no início do título e mantenha clareza para o leitor e para os buscadores.",
-  },
-  {
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <circle cx="8.5" cy="8.5" r="1.5" />
-        <path d="M21 15l-5-5L5 21" />
-      </svg>
-    ),
-    title: "Imagens leves",
-    desc: "Comprima e defina texto alternativo com palavras-chave relevantes para melhorar o ranqueamento.",
-  },
-  {
-    icon: (
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
-      </svg>
-    ),
-    title: "Seções escaneáveis",
-    desc: "Divida em blocos curtos com listas e subtítulos para facilitar a leitura e a indexação.",
-  },
-];
-
 const tags = [
   "cardápio digital",
   "cardápio online",
@@ -129,7 +70,7 @@ export default function Page() {
 
       {/* ── Banner com botão "Voltar ao Blog" integrado ── */}
       <ArticleBanner
-        title="Cardápio Digital para Restaurantes"
+        title="Cardápio Digital"
         subtitle="Como criar um cardápio digital otimizado para aumentar pedidos e presença no Google."
         image="/banner-blog.png"
         backHref="/blog"
@@ -148,38 +89,45 @@ export default function Page() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-14 md:py-20">
           <article className="max-w-3xl mx-auto lg:max-w-none">
             {/* Intro */}
-            <p className="text-neutral-300 text-lg md:text-xl leading-relaxed max-w-2xl border-l-2 border-red-500 pl-5">
-              Um cardápio digital melhora a experiência do cliente, facilita
-              atualizações e aumenta sua presença em buscas como{" "}
+            <p className="text-neutral-300 text-lg md:text-xl leading-relaxed border-l-2 border-red-500 pl-5">
+              Um{" "}
               <strong className="text-white font-medium">
                 cardápio digital
               </strong>{" "}
-              e <strong className="text-white font-medium">delivery</strong>.
+              permite que restaurantes, hamburguerias, pizzarias e lanchonetes
+              mostrem seus produtos online de forma prática e moderna. Com
+              apenas um link, seus clientes podem visualizar o menu completo,
+              escolher produtos e fazer pedidos rapidamente pelo WhatsApp ou
+              pelo sistema de pedidos.
             </p>
 
             {/* Section 1 */}
             <section aria-labelledby="por-que-section" className="mt-16">
               <AnimatedSectionTitle>
-                <span id="por-que-section">
-                  Por que ter um cardápio digital
-                </span>
+                <h2 id="por-que-section">Por que usar um Cardápio Digital?</h2>
               </AnimatedSectionTitle>
 
-              <p className="text-neutral-300 mt-4 leading-relaxed max-w-2xl">
-                Com um cardápio online, seu restaurante aparece para mais
-                buscas, pode lançar promoções com rapidez e reduzir o tempo de
-                atualização de preços e fotos.
+              <p className="text-neutral-300 mt-4 text-lg leading-relaxed">
+                O cardápio digital se tornou uma ferramenta essencial para
+                restaurantes que querem vender mais no delivery. Diferente de
+                cardápios tradicionais ou PDFs, ele permite atualizar preços,
+                adicionar novos produtos e compartilhar o menu facilmente em
+                redes sociais, Google ou WhatsApp. Além disso, melhora a
+                experiência do cliente e ajuda a profissionalizar o atendimento
+                do seu negócio.
               </p>
 
               <ul className="mt-6 space-y-3">
                 {[
-                  "Atualize preços e fotos em tempo real, sem imprimir nada",
-                  "Apareça para quem busca delivery e cardápio online na sua cidade",
-                  "Reduza erros de pedido com descrições e imagens detalhadas",
+                  "Compartilhe seu cardápio online por link no WhatsApp, Instagram ou Google",
+                  "Atualize preços e produtos em tempo real sem precisar reimprimir cardápios",
+                  "Permite que clientes façam pedidos de forma rápida e organizada",
+                  "Melhora a apresentação dos produtos com fotos, descrições e categorias",
+                  "Ideal para hamburguerias, pizzarias, açaiterias, sorveterias e restaurantes",
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 text-neutral-300"
+                    className="flex items-start gap-3 text-neutral-300 text-lg"
                   >
                     <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center">
                       <svg
@@ -207,45 +155,26 @@ export default function Page() {
             </div>
 
             {/* Section 2 */}
-            <section aria-labelledby="seo-section" className="mt-16">
+            <section aria-labelledby="seo-section" className="mt-16 w-full">
               <AnimatedSectionTitle>
-                <span id="seo-section">Boas práticas de SEO</span>
+                <h3 id="seo-section">
+                  Cardápio Digital para Restaurantes e Delivery
+                </h3>
               </AnimatedSectionTitle>
 
-              <p className="text-neutral-300 mt-4 leading-relaxed max-w-2xl">
-                Inclua palavras-chave em títulos, descrições e headings. Use
-                URLs amigáveis, imagens otimizadas e conteúdo escaneável para
-                aumentar relevância.
+              <p className="text-neutral-300 mt-4 text-lg leading-relaxed">
+                Utilizar um cardápio digital para restaurantes é uma das formas
+                mais eficientes de aumentar as vendas no delivery. Com ele, os
+                clientes podem acessar o menu pelo celular, escolher produtos,
+                visualizar preços atualizados e enviar pedidos diretamente pelo
+                WhatsApp ou pelo painel de pedidos. Essa tecnologia facilita o
+                atendimento, reduz erros nos pedidos e ajuda o restaurante a ter
+                mais controle sobre o cardápio e promoções. Além disso, um
+                cardápio online melhora a presença digital do restaurante,
+                ajudando a atrair novos clientes que pesquisam no Google por
+                restaurantes, delivery ou pedidos de comida online.
               </p>
             </section>
-
-            {/* SEO Cards */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {seoCards.map((card) => (
-                <div
-                  key={card.title}
-                  className="group relative rounded-2xl border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm p-6 hover:border-red-500/40 hover:bg-neutral-900 transition-all duration-300 overflow-hidden"
-                >
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 30% 20%, rgba(239,68,68,0.06) 0%, transparent 70%)",
-                    }}
-                  />
-                  <div className="w-10 h-10 rounded-xl bg-neutral-800 border border-neutral-700 flex items-center justify-center text-red-400 mb-4 group-hover:border-red-500/40 transition-colors">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-base font-semibold text-white mb-2">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    {card.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
 
             {/* Contact Panel */}
             <div className="mt-14">
@@ -270,9 +199,17 @@ export default function Page() {
             </div>
           </article>
 
-          {/* Contact Form */}
-          <div className="mt-20 max-w-2xl mx-auto">
-            <ContactForm />
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="overflow-hidden">
+              <img
+                src="/image-banner.png"
+                alt="Entre em contato - Link Food"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="max-w-2xl">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

@@ -9,7 +9,148 @@ export type BlogEntry = {
   };
 };
 
-export const BLOG_ENTRIES: BlogEntry[] = [
+const EXTRA_SLUGS = [
+  "sistema-delivery-restaurante",
+  "cardapio-digital-restaurante",
+  "sistema-pedidos-restaurante",
+  "delivery-proprio-restaurante",
+  "sistema-pedidos-whatsapp",
+  "cardapio-online-restaurante",
+  "sistema-para-delivery",
+  "plataforma-pedidos-online",
+  "software-para-restaurantes",
+  "sistema-gestao-restaurante",
+  "pedidos-whatsapp-restaurante",
+  "cardapio-digital-whatsapp",
+  "sistema-pedidos-whatsapp-restaurante",
+  "cardapio-online-whatsapp",
+  "automatizar-pedidos-whatsapp",
+  "receber-pedidos-whatsapp",
+  "bot-whatsapp-restaurante",
+  "sistema-delivery-whatsapp",
+  "pedidos-automaticos-whatsapp",
+  "cardapio-digital-com-whatsapp",
+  "sistema-para-hamburgueria",
+  "sistema-para-pizzaria",
+  "sistema-para-acaiteria",
+  "sistema-para-sorveteria",
+  "sistema-para-marmitaria",
+  "sistema-para-restaurante-fit",
+  "sistema-para-loja-de-salgados",
+  "sistema-para-lanchonete",
+  "sistema-para-food-truck",
+  "sistema-para-doceria",
+  "sistema-para-boleira",
+  "sistema-delivery-pizzaria",
+  "sistema-delivery-hamburgueria",
+  "sistema-delivery-marmitas",
+  "sistema-delivery-acai",
+  "sistema-delivery-sorvete",
+  "software-delivery-restaurante",
+  "sistema-pedidos-online-restaurante",
+  "aplicativo-delivery-restaurante",
+  "plataforma-delivery-restaurante",
+  "sistema-pedidos-comida",
+  "sistema-controle-pedidos-restaurante",
+  "software-controle-delivery",
+  "gestao-delivery-restaurante",
+  "sistema-pedidos-tempo-real",
+  "painel-pedidos-restaurante",
+  "sistema-controle-cardapio",
+  "software-gestao-food-service",
+  "sistema-vendas-restaurante",
+  "gestao-pedidos-restaurante",
+  "software-restaurante-delivery",
+  "criar-cardapio-digital",
+  "cardapio-digital-delivery",
+  "cardapio-online-delivery",
+  "cardapio-qr-code-restaurante",
+  "menu-digital-restaurante",
+  "site-cardapio-digital",
+  "cardapio-online-pizzaria",
+  "cardapio-online-hamburgueria",
+  "cardapio-online-restaurante-delivery",
+  "cardapio-digital-gratis-restaurante",
+  "como-criar-cardapio-digital-restaurante",
+  "como-receber-pedidos-whatsapp",
+  "sistema-delivery-sem-taxa",
+  "criar-site-delivery-restaurante",
+  "alternativa-ifood-restaurante",
+  "delivery-proprio-restaurante-online",
+  "sistema-vender-comida-online",
+  "plataforma-pedidos-comida",
+  "cardapio-online-com-pedidos",
+  "como-montar-delivery-proprio",
+  "sistema-delivery-restaurante-em-sao-paulo",
+  "software-restaurante-em-sao-paulo",
+  "cardapio-digital-restaurante-em-sao-paulo",
+  "sistema-delivery-pizzaria-em-sao-paulo",
+  "sistema-hamburgueria-em-sao-paulo",
+  "plataforma-delivery-restaurantes-pequenos",
+  "software-restaurantes-pequenos",
+  "sistema-delivery-lanchonete",
+  "sistema-delivery-marmitaria",
+  "sistema-restaurante-pequeno",
+  "aumentar-vendas-delivery",
+  "vender-comida-online",
+  "sistema-aumentar-vendas-restaurante",
+  "ferramenta-delivery-restaurante",
+  "tecnologia-para-restaurante",
+  "digitalizar-restaurante",
+  "pedidos-online-restaurante",
+  "automacao-delivery-restaurante",
+  "software-food-delivery",
+  "plataforma-pedidos-comida-online",
+  "como-montar-delivery",
+  "como-aumentar-vendas-restaurante",
+  "como-vender-mais-delivery",
+  "como-criar-cardapio-online",
+  "como-receber-pedidos-online",
+  "cardapio-digital-pequenos-restaurantes",
+  "sistema-delivery-barato",
+  "software-delivery-comida",
+  "criar-site-restaurante",
+  "delivery-online-restaurante",
+];
+
+function humanize(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function makeEntry(slug: string): BlogEntry {
+  const title = humanize(slug);
+  const keywords = slug.split("-");
+  return {
+    slug,
+    title,
+    description: `Guia completo sobre ${title}. Aprenda práticas e estratégias para melhorar resultados.`,
+    keywords,
+    heroImage: "/image-banner.png",
+    content: {
+      sections: [
+        {
+          heading: "Visão geral",
+          paragraphs: [
+            `Este conteúdo aborda ${title} com foco em boas práticas e resultados práticos.`,
+            "Estruture seu fluxo, defina metas e utilize ferramentas adequadas para escalar com previsibilidade.",
+          ],
+        },
+        {
+          heading: "Como implementar",
+          paragraphs: [
+            "Organize processos, automatize tarefas e acompanhe métricas de desempenho.",
+            "Aplique SEO on‑page, páginas dedicadas e CTAs claros para aumentar conversão.",
+          ],
+        },
+      ],
+    },
+  };
+}
+
+const BASE_ENTRIES: BlogEntry[] = [
   {
     slug: "cardapio-digital",
     title: "Cardápio Digital para Restaurantes",
@@ -74,7 +215,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Estratégias práticas para aumentar vendas do delivery com SEO e experiência.",
     keywords: ["aumentar vendas", "delivery", "promoções", "combos"],
-    heroImage: "/pizzaria.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -105,7 +246,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
       "delivery hambúrguer",
       "SEO local",
     ],
-    heroImage: "/hamburgueria.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -131,7 +272,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Guia de SEO para criar páginas de sabores e combos que ranqueiam.",
     keywords: ["menu pizzaria", "pizza delivery", "sabores de pizza"],
-    heroImage: "/pizzaria.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -157,7 +298,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Como montar um cardápio online simples e eficaz para seu negócio.",
     keywords: ["cardápio simples", "menu online", "loja virtual de comida"],
-    heroImage: "/marmita.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -183,7 +324,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Estratégias de promoções e cupons para aumentar pedidos do delivery.",
     keywords: ["promoções delivery", "cupons", "combos", "frete grátis"],
-    heroImage: "/logo-footer.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -209,7 +350,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Passo a passo de SEO para ranquear páginas de delivery e cardápio.",
     keywords: ["SEO delivery", "SEO restaurante", "otimização de conteúdo"],
-    heroImage: "/globe.svg",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -235,7 +376,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Como construir landing pages de delivery que ranqueiam e convertem.",
     keywords: ["landing page delivery", "página de vendas", "CTA"],
-    heroImage: "/logo.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -261,7 +402,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Perguntas frequentes estruturadas para aumentar visibilidade e confiança.",
     keywords: ["FAQ delivery", "perguntas frequentes", "rich results"],
-    heroImage: "/file.svg",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -287,7 +428,7 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     description:
       "Otimize seu cardápio de marmitas com SEO local e fotos reais.",
     keywords: ["marmitas", "cardápio marmitaria", "delivery marmita"],
-    heroImage: "/marmita.png",
+    heroImage: "/image-banner.png",
     content: {
       sections: [
         {
@@ -308,6 +449,22 @@ export const BLOG_ENTRIES: BlogEntry[] = [
     },
   },
 ];
+
+const seen = new Set<string>();
+const arr: BlogEntry[] = [];
+for (const e of BASE_ENTRIES) {
+  if (!seen.has(e.slug)) {
+    seen.add(e.slug);
+    arr.push(e);
+  }
+}
+for (const e of EXTRA_SLUGS.map(makeEntry)) {
+  if (!seen.has(e.slug)) {
+    seen.add(e.slug);
+    arr.push(e);
+  }
+}
+export const BLOG_ENTRIES: BlogEntry[] = arr;
 
 export function getBlogEntryBySlug(slug: string): BlogEntry | undefined {
   return BLOG_ENTRIES.find((e) => e.slug === slug);

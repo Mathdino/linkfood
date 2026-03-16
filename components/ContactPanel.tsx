@@ -76,7 +76,7 @@ export default function ContactPanel() {
             {/* Contact cards */}
             <div className="mt-6 flex flex-col gap-2.5">
               {contacts.map(({ icon: Icon, label, value, href }) => {
-                const Wrapper = href ? Link : "div";
+                const Wrapper = href ? "a" : "div";
                 return (
                   <Wrapper
                     key={label}
